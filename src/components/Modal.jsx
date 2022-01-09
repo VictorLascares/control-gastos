@@ -1,12 +1,14 @@
 import { useState } from 'react'
+import Message from './Message'
 import CloseBtn from '../img/cerrar.svg'
 
-const Modal = ({setModal, animateModal, setAnimateModal}) => {
+const Modal = ({setModal, animateModal, setAnimateModal, saveExpense}) => {
     const [spending, setSpending] = useState({
         name: '',
         amount: '',
         category: ''
     })
+    const [message, setMessage] = useState('')
 
     const hideModal = () => {
         setAnimateModal(false)
@@ -19,7 +21,6 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
     const handleChange = e => {
         const {name, value}  = e.target
         if(name == 'amount'){
-            console.log(spending.amount);
             setSpending(prevSpending => ({
                 ...prevSpending,
                 [name]: Number(value)
@@ -32,6 +33,23 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
         }))
     }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        // Validación del formulario
+        if(Object.values(spending).includes('')){
+            setMessage('Todos los Campos son obligatorios')
+
+            setTimeout(() => {
+                setMessage('')
+            },3000)
+            return
+        }
+
+        saveExpense(spending)
+    }
+
+    
+
     return (
         <div className="modal">
             <div className="cerrar-modal">
@@ -41,8 +59,13 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
                     onClick={hideModal} 
                 />
             </div>
-            <form className={`formulario ${animateModal ? "animar": 'cerrar'}`}>
+            <form
+                onSubmit={handleSubmit}
+                className={`formulario ${animateModal ? "animar": 'cerrar'}`}
+            >
                 <legend>Nuevo Gasto</legend>
+                {message && <Message type="error">{message}</Message>}
+
                 <div className="campo">
                     <label htmlFor="nombre">Nombre de Gasto</label>
                     <input

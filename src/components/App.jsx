@@ -8,6 +8,7 @@ function App() {
   const [isValidBudget, setIsValidBudget] = useState(false)
   const [modal, setModal] = useState(false)
   const [animateModal, setAnimateModal] = useState(false)
+  const [expenses, setExpenses] = useState([])
 
   const handleNewBudget = () => {
     setModal(true)
@@ -16,7 +17,9 @@ function App() {
       setAnimateModal(true)
     },500)
   }
-
+  const saveExpense = spending => {
+    console.log(spending);
+  }
 
 
   return (
@@ -42,6 +45,7 @@ function App() {
         setModal={setModal} 
         animateModal={animateModal}
         setAnimateModal={setAnimateModal}
+        saveExpense={saveExpense}
       />}
     </>
   )
