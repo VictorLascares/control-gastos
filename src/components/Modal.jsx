@@ -1,6 +1,12 @@
+import { useState } from 'react'
 import CloseBtn from '../img/cerrar.svg'
 
 const Modal = ({setModal, animateModal, setAnimateModal}) => {
+    const [spending, setSpending] = useState({
+        name: '',
+        amount: '',
+        category: ''
+    })
 
     const hideModal = () => {
         setAnimateModal(false)
@@ -8,6 +14,22 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
         setTimeout(() => {
             setModal(false)
         }, 500)
+    }
+
+    const handleChange = e => {
+        const {name, value}  = e.target
+        if(name == 'amount'){
+            console.log(spending.amount);
+            setSpending(prevSpending => ({
+                ...prevSpending,
+                [name]: Number(value)
+            }))
+            return
+        }
+        setSpending(prevSpending => ({
+            ...prevSpending,
+            [name]: value
+        }))
     }
 
     return (
@@ -27,6 +49,9 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
                         id='nombre'
                         type="text" 
                         placeholder='Añade el Nombre del Gasto'
+                        value={spending.name}
+                        onChange={handleChange}
+                        name='name'
                     />
                 </div>
 
@@ -36,6 +61,9 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
                         id='cantidad'
                         type="number" 
                         placeholder='Añade la cantidad del gasto'
+                        value={spending.amount}
+                        onChange={handleChange}
+                        name='amount'
                     />
                 </div>
 
@@ -43,8 +71,11 @@ const Modal = ({setModal, animateModal, setAnimateModal}) => {
                     <label htmlFor="categoria">Categoria</label>
                     <select 
                         id="categoria"
+                        value={spending.category}
+                        onChange={handleChange}
+                        name='category'
                     >
-                        <option selected disabled value="">-- Seleccione --</option>
+                        <option value="" disabled>-- Seleccione --</option>
                         <option value="ahorro">Ahorro</option>
                         <option value="comida">Comida</option>
                         <option value="casa">Casa</option>
