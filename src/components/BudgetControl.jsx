@@ -1,13 +1,6 @@
+import { formatQuantity } from "../helpers"
 
 const BudgetControl = ({budget}) => {
-
-
-    const formatQuantity = (quantity) => {
-        return quantity.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        })
-    }
 
     return (
         <div className="contenedor-presupuesto contenedor sombra dos-columnas">
