@@ -46,6 +46,7 @@ const Modal = ({setModal, animateModal, setAnimateModal, saveExpense}) => {
         }
 
         saveExpense(spending)
+        hideModal()
     }
 
     

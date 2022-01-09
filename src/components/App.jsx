@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from './Header'
 import IconNewSpending from '../img/nuevo-gasto.svg'
+import { generateId } from '../helpers'
 import Modal from './Modal'
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
     },500)
   }
   const saveExpense = spending => {
-    console.log(spending);
+    spending['id'] = generateId()
+    setExpenses([...expenses, spending])
   }
 
 
