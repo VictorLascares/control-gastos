@@ -27,7 +27,7 @@ function App() {
 
 
   return (
-    <>
+    <div className={modal && 'fijar'}>
       <Header
         budget={budget}
         setBudget={setBudget}
@@ -58,7 +58,7 @@ function App() {
         setAnimateModal={setAnimateModal}
         saveExpense={saveExpense}
       />}
-    </>
+    </div>
   )
 }
 
