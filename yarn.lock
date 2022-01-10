@@ -570,6 +570,11 @@ react-refresh@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
+react-swipeable-list@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable-list/-/react-swipeable-list-1.5.0.tgz#fc923947ac2de01a1a20b53665a0b4c20a2f7f14"
+  integrity sha512-fHJl/7zPANe+t0zTFIkD0Ntp7UMHNGY1mY00Nr2KIHh1V3VB9hfR8ncwLOOqwWR24qzs0P9FECJpavy22lsmHw==
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
