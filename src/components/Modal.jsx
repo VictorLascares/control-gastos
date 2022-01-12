@@ -14,7 +14,8 @@ const Modal = ({setModal, animateModal, setAnimateModal, saveExpense, editExpens
                 name: editExpense.name,
                 amount: editExpense.amount,
                 category: editExpense.category,
-                id: editExpense.id
+                id: editExpense.id,
+                date: editExpense.date
             })
         }
     }, [])
