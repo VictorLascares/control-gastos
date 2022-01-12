@@ -1,13 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Message from './Message'
 import CloseBtn from '../img/cerrar.svg'
 
-const Modal = ({setModal, animateModal, setAnimateModal, saveExpense}) => {
+const Modal = ({setModal, animateModal, setAnimateModal, saveExpense, editExpense}) => {
     const [spending, setSpending] = useState({
         name: '',
         amount: '',
         category: ''
     })
+    useEffect(() => {
+        if (Object.keys(editExpense).length > 0) {
+            setSpending({
+                name: editExpense.name,
+                amount: editExpense.amount,
+                category: editExpense.category,
+                id: editExpense.id
+            })
+        }
+    }, [])
     const [message, setMessage] = useState('')
 
     const hideModal = () => {
@@ -64,7 +74,7 @@ const Modal = ({setModal, animateModal, setAnimateModal, saveExpense}) => {
                 onSubmit={handleSubmit}
                 className={`formulario ${animateModal ? "animar": 'cerrar'}`}
             >
-                <legend>Nuevo Gasto</legend>
+                <legend>{editExpense.name ?'Editar Gasto': 'Nuevo Gasto'}</legend>
                 {message && <Message type="error">{message}</Message>}
 
                 <div className="campo">
@@ -111,7 +121,7 @@ const Modal = ({setModal, animateModal, setAnimateModal, saveExpense}) => {
                 </div>
                 <input 
                     type="submit"
-                    value="Añadir Gasto"
+                    value={editExpense.name ?'Guardar Cambios': 'Añadir Gasto'}
                 />
             </form>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './Header'
 import ExpenseList from './ExpenseList'
 import Modal from './Modal'
@@ -11,18 +11,41 @@ function App() {
   const [modal, setModal] = useState(false)
   const [animateModal, setAnimateModal] = useState(false)
   const [expenses, setExpenses] = useState([])
+  const [editExpense, setEditExpense] = useState({})
+
+
+  useEffect(() => {
+    if (Object.keys(editExpense).length > 0) {
+      setModal(true)
+      setTimeout(() => {
+        setAnimateModal(true)
+      },500)
+    }
+  }, [editExpense])
 
   const handleNewBudget = () => {
     setModal(true)
-
+    setEditExpense({})
     setTimeout(() => {
       setAnimateModal(true)
     },500)
   }
   const saveExpense = spending => {
-    spending['id'] = generateId()
-    spending['date'] = Date.now()
-    setExpenses([...expenses, spending])
+    if(spending.id){
+      // Actualizar
+      const updatedExpenses = expenses.map( expenseState => expenseState.id === spending.id ? spending : expenseState)
+      setExpenses(updatedExpenses)
+    } else {
+      // Nuevo Gasto
+      spending['id'] = generateId()
+      spending['date'] = Date.now()
+      setExpenses([...expenses, spending])
+    }
+
+    setAnimateModal(false)
+    setTimeout(() => {
+      setModal(false)
+    }, 500);
   }
 
 
@@ -41,6 +64,7 @@ function App() {
           <main>
             <ExpenseList 
               expenses={expenses}
+              setEditExpense={setEditExpense}
             />
           </main>
           <div className="nuevo-gasto">
@@ -58,6 +82,7 @@ function App() {
         animateModal={animateModal}
         setAnimateModal={setAnimateModal}
         saveExpense={saveExpense}
+        editExpense={editExpense}
       />}
     </div>
   )
