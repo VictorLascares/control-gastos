@@ -12,7 +12,9 @@ function App() {
   const [isValidBudget, setIsValidBudget] = useState(false)
   const [modal, setModal] = useState(false)
   const [animateModal, setAnimateModal] = useState(false)
-  const [expenses, setExpenses] = useState([])
+  const [expenses, setExpenses] = useState(
+    localStorage.getItem('expenses') ? JSON.parse(localStorage.getItem('expenses')):[]
+  )
   const [editExpense, setEditExpense] = useState({})
 
 
@@ -29,6 +31,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('budget', budget)
   },[budget])
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses) ?? [])
+  },[expenses])
 
   useEffect(() => {
     const budgetLocalStorage = Number(localStorage.getItem('budget')) ?? 0
