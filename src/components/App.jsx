@@ -35,6 +35,7 @@ function App() {
       // Actualizar
       const updatedExpenses = expenses.map( expenseState => expenseState.id === spending.id ? spending : expenseState)
       setExpenses(updatedExpenses)
+      setEditExpense({})
     } else {
       // Nuevo Gasto
       spending['id'] = generateId()
@@ -89,6 +90,7 @@ function App() {
         setAnimateModal={setAnimateModal}
         saveExpense={saveExpense}
         editExpense={editExpense}
+        setEditExpense={setEditExpense}
       />}
     </div>
   )
